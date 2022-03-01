@@ -1,10 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const mongoose = require('mongoose');
 
 const adminRoutes = require('./routes/admin/adminRoutes');
 const authRoutes = require('./routes/authentication/loginRoutes');
 const shopRoutes = require('./routes/products/productRoutes');
+
+
+const MONGODB_URL = "mongodb+srv://admin:admin@cluster0.9h2tp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+
 
 const app = express();
 
@@ -23,4 +27,11 @@ app.use(shopRoutes);
 
 
 
-app.listen(8080);
+mongoose
+  .connect(MONGODB_URL)
+  .then(result => {
+    app.listen(8080);
+  })
+  .catch(err => {
+    console.log(err);
+  });
