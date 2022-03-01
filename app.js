@@ -21,7 +21,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(adminRoutes);
+app.use(adminRoutes)
 app.use(authRoutes);
 app.use(shopRoutes);
 
