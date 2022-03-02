@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+//Do we want to add quantity or price-per-dozen fields?
 const productSchema = new Schema({
     title: {
         type: String,
