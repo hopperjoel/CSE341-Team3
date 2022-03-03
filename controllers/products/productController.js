@@ -1,5 +1,9 @@
-// Controller for sending product info to be displayed in view
-
+/****************************************************
+ * Product Controller
+ * 
+ * Controller for sending product info to be displayed
+ * in view.
+ ***************************************************/
 const fs = require('fs');
 
 const Products = require('../../models/products');

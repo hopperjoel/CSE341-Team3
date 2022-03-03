@@ -1,5 +1,9 @@
-//Controller for admin functions including adding, editing, or deleting projects
-
+/****************************************************
+ * Admin Controller
+ * 
+ * Controller for admin functions including adding,
+ * editing, or deleting products
+ ***************************************************/
 const Product = require('../../models/products');
 
 //Not sure about requiring express-validator with using API's?
