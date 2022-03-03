@@ -1,0 +1,12 @@
+############# Dependencies #############
+
+ - npm i to install all dependences listed in current project -
+
+Dependency List:
+
+
+
+
+
+
+############# Other Notes #############

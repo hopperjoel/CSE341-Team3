@@ -1,7 +1,17 @@
-const express = require('express')
+/****************************************************
+ * Homepage Routes
+ ***************************************************/
+const express = require('express');
+const homepageController = require('../../controllers/products/homepageController');
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/')
+/****************************************************
+ * GET Routes
+ ****************************************************/
+router.get('/home', homepageController.getHomepage);
 
-module.exports = router
+/****************************************************
+ * POST Routes
+ ****************************************************/
+module.exports = router;
