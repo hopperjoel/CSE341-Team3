@@ -7,12 +7,12 @@ const cartController = require('../../controllers/admin/cartController');
 const router = express.Router();
 
 /****************************************************
- * GET Methods
+ * GET Routes
  ****************************************************/
 router.get('/cart', cartController.getCart);
 
 /****************************************************
- * POST Methods
+ * POST Routes
  ****************************************************/
 
 module.exports = router;

@@ -9,7 +9,7 @@ const Product = require('../../models/products');
 //Not sure about requiring express-validator with using API's?
 
 /****************************************************
- * GET Methods
+ * GET Controllers
  ****************************************************/
 exports.getProducts = (req, res, next) => {
 
@@ -24,7 +24,7 @@ exports.getEditProduct = (req, res, next) => {
 }
 
 /****************************************************
- * POST Methods
+ * POST Controllers
  ****************************************************/
 exports.postAddProduct = (req, res, next) => {
     const title = req.body.title;

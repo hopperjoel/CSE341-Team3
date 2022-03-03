@@ -8,6 +8,14 @@ const fs = require('fs');
 
 const Products = require('../../models/products');
 
+/****************************************************
+ * GET Controllers
+ ****************************************************/
+
+/****************************************************
+ * POST Controllers
+ ****************************************************/
+
 /*
  
 // From: https://stackoverflow.com/questions/24523532/how-do-i-convert-an-image-to-a-base64-encoded-data-url-in-sails-js-or-generally
