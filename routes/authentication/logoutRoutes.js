@@ -1,7 +1,8 @@
 /****************************************************
- * Login Routes
+ * Logout Routes
  ***************************************************/
 const express = require('express');
+const logoutController = require('../../controllers/authentication/logoutController');
 
 const router = express.Router();
 

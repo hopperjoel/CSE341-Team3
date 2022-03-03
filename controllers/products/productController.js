@@ -11,6 +11,9 @@ const Products = require('../../models/products');
 /****************************************************
  * GET Controllers
  ****************************************************/
+exports.getProducts = (req, res, next) => {
+    
+}
 
 /****************************************************
  * POST Controllers
