@@ -34,8 +34,6 @@ exports.postEditProduct = (req, res, next) => {
     const newDescription = req.body.description;
     const newImage = req.body.image;
 
-    // not sure how to handle errors...
-
     const product = new Product({
         title: newTitle,
         price: newPrice,
@@ -44,16 +42,31 @@ exports.postEditProduct = (req, res, next) => {
     });
 
     Product.findById(productId)
+    .then(product => {
+        if (product.userId.toString() !== req.user._id.toString) {
+            return res.status(400).json({
+                message: "Product id not found"
+            })
+        }
+    })
     product
         .save()
         .then((result) => {
             res.status(201).json({
-                message: 'Product Successfully Edited'
+                message: "Product Successfully Edited"
             })
-        }) 
+        })
+        .catch(err => console.log(err)) // or send the error through the response?
 };
 
 
 exports.postDeleteProduct = (req, res, next) => {
-
+    const productId = req.body.productId;
+    
+    Product.findByIdAndDelete(productId)
+    .then(result => {
+        res.status(200).json({
+            message: "Product Deleted"
+        })
+    })
 };
