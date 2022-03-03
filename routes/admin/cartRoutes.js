@@ -1,4 +1,6 @@
-// Routes for all things pertaining to the cart and orders
+/****************************************************
+ * Cart Routes
+ ***************************************************/
 const express = require('express');
 const cartController = require('../../controllers/admin/cartController');
 
