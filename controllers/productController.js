@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-const Products = require('../../models/products');
+const Products = require('../models/products');
 
 /*
  
