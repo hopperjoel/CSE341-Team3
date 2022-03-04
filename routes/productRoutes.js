@@ -1,17 +1,16 @@
 /****************************************************
- * Admin Routes
+ * Product Routes
  ***************************************************/
-const express = require('express')
-const adminController = require('../../controllers/admin/adminController');
+const express = require('express');
+const productsController = require('../controllers/products/productController');
 
-const router = express.Router()
+const router = express.Router();
 
 /****************************************************
  * GET Routes
  ****************************************************/
-router.get('/admin-products', adminController.getProducts);
-router.get('/add-product', adminController.getAddProduct);
-router.get('/edit-product', adminController.getEditProduct);
+router.get('/home', homepageController.getHomepage);
+router.get('/products', productsController.getProducts);
 
 /****************************************************
  * POST Routes

@@ -1,16 +1,14 @@
 /****************************************************
- * Cart Controller
+ * Product Controller
  * 
- * Controller for all things pertaining to the cart and orders
- ***************************************************/ 
-const Product = require('../../models/products');
+ * Controller for the main page of the store
+ ***************************************************/
+ const Product = require('../models/products');
 
 /****************************************************
  * GET Controllers
  ****************************************************/
-exports.getCart = (req, res, next) => {
 
-}
 
 /****************************************************
  * POST Controllers

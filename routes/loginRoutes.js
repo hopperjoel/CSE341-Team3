@@ -1,15 +1,15 @@
 /****************************************************
- * Logout Routes
+ * Login Routes
  ***************************************************/
 const express = require('express');
-const logoutController = require('../../controllers/authentication/logoutController');
+const loginController = require('../controllers/loginController');
 
 const router = express.Router();
 
 /****************************************************
  * GET Routes
  ****************************************************/
-router.get('/');
+router.get('/login', loginController.getLogin);
 
 /****************************************************
  * POST Routes

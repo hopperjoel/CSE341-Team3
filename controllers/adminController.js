@@ -4,7 +4,7 @@
  * Controller for admin functions including adding,
  * editing, or deleting products
  ***************************************************/
-const Product = require('../../models/products');
+const Product = require('../models/products');
 
 //Not sure about requiring express-validator with using API's?
 
@@ -20,6 +20,10 @@ exports.getAddProduct = (req, res, next) => {
 }
 
 exports.getEditProduct = (req, res, next) => {
+
+}
+
+exports.getCart = (req, res, next) => {
 
 }
 

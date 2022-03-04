@@ -1,15 +1,19 @@
 /****************************************************
- * Login Routes
+ * Admin Routes
  ***************************************************/
-const express = require('express');
-const loginController = require('../../controllers/authentication/loginController');
+const express = require('express')
+const adminController = require('../controllers/admin/adminController');
 
-const router = express.Router();
+const router = express.Router()
 
 /****************************************************
  * GET Routes
  ****************************************************/
-router.get('/login', loginController.getLogin);
+router.get('/admin-products', adminController.getProducts);
+router.get('/add-product', adminController.getAddProduct);
+router.get('/edit-product', adminController.getEditProduct);
+
+router.get('/cart', cartController.getCart);
 
 /****************************************************
  * POST Routes

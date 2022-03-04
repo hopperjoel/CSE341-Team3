@@ -1,13 +1,16 @@
 /****************************************************
- * Logout Controller
+ * Login Controller
  * 
- * Controller for logging out
+ * Used for logging into user accounts
  ***************************************************/
-const Product = require('../../models/products');
+ const Product = require('../models/products');
 
 /****************************************************
  * GET Controllers
  ****************************************************/
+exports.getLogin = (req, res, next) => {
+
+}
 
 /****************************************************
  * POST Controllers
