@@ -30,7 +30,7 @@ exports.getCart = (req, res, next) => {
 /****************************************************
  * POST Controllers
  ****************************************************/
-exports.postAddProduct = (req, res, next) => {
+exports.putAddProduct = (req, res, next) => {
     const title = req.body.title;
     const price = req.body.price;
     const description = req.body.description;
@@ -83,3 +83,4 @@ exports.postEditProduct = (req, res, next) => {
 exports.postDeleteProduct = (req, res, next) => {
 
 };
+

@@ -26,7 +26,6 @@ app.use(authRoutes);
 app.use(shopRoutes);
 
 
-
 mongoose
   .connect(MONGODB_URL)
   .then(result => {
