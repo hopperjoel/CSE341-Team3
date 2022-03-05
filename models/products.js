@@ -20,6 +20,8 @@ const productSchema = new Schema({
         type: String,
         required: true
     }
+    //Do we need to add another field with the number of purchases?
+    //That would be for the "popular items" that display on the homepage
 })
 
 
