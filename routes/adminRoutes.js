@@ -18,4 +18,8 @@ router.get('/cart', cartController.getCart);
 /****************************************************
  * POST Routes
  ****************************************************/
+
+// Linds***
+//  router.post('/delete-product', isAuth, adminController.postDeleteProduct);
+
 module.exports = router;
