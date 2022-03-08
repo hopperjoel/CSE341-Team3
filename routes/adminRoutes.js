@@ -10,10 +10,10 @@ const router = express.Router()
  * GET Routes
  ****************************************************/
 router.get('/admin-products', adminController.getProducts);
-router.get('/add-product', adminController.getAddProduct);
+
 router.get('/edit-product', adminController.getEditProduct);
 
-router.get('/cart', cartController.getCart);
+router.get('/cart', adminController.getCart);
 
 /****************************************************
  * POST Routes
@@ -21,5 +21,5 @@ router.get('/cart', cartController.getCart);
 
 // Linds***
 //  router.post('/delete-product', isAuth, adminController.postDeleteProduct);
-
+router.put('/add-product', adminController.putAddProduct);
 module.exports = router;

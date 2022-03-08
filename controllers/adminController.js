@@ -28,10 +28,6 @@ exports.getProducts = (req, res, next) => {
         })
 }
 
-exports.getAddProduct = (req, res, next) => {
-
-}
-
 exports.getEditProduct = (req, res, next) => {
 
 }
@@ -51,7 +47,7 @@ exports.putAddProduct = (req, res, next) => {
 
     // not sure how to handle errors...
 
-    const product = new Product({
+    const product = new Products({
         title: title,
         price: price,
         description: description,

@@ -33,7 +33,9 @@ exports.getHomepage = (req, res, next) => {
     //         })
     //     }) 
     
-
+exports.getProducts = (req, res, next) => {
+    
+}
 /****************************************************
  * POST Controllers
  ****************************************************/
