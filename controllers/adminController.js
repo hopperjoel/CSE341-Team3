@@ -97,3 +97,17 @@ exports.postDeleteProduct = (req, res, next) => {
 
 };
 
+// Linds***
+// exports.postDeleteProduct = (req, res, next) => {
+//     const prodId = req.body.productId;
+//     Product.deleteOne({ _id: prodId, userId: req.user._id })
+//       .then(() => {
+//         console.log('DESTROYED PRODUCT');
+//         res.redirect('/admin/products');
+//       })
+//       .catch(err => {
+//         const error = new Error(err);
+//         error.httpStatusCode = 500;
+//         return next(error);
+//       });
+//   };
