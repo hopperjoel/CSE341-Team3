@@ -4,7 +4,8 @@
  * Used for logging into user accounts
  ***************************************************/
  const Product = require('../models/products');
-
+ const User = require('../models/users')
+ const bcrypt = require('bcryptjs')
 /****************************************************
  * GET Controllers
  ****************************************************/
@@ -19,15 +20,15 @@ exports.getLogin = (req, res, next) => {
 exports.postSignup = (req, res, next) => {
 const email = req.body.email;
 const password = req.body.password;
-    return res.status(422).json({
-    //error if there is already a user with that email in database
-    errorMessage: 'There was already a user with this email',
-    oldInput: {
-        email: email,
-        password: password,
-        confirmPassword: req.body.confirmPassword
-    },
-    });
+    // return res.status(422).json({
+    // //error if there is already a user with that email in database
+    // errorMessage: 'There was already a user with this email',
+    // oldInput: {
+    //     email: email,
+    //     password: password,
+    //     confirmPassword: req.body.confirmPassword
+    // },
+    // });
 
 bcrypt
     .hash(password, 12)
