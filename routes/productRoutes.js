@@ -11,6 +11,7 @@ const router = express.Router();
  ****************************************************/
 router.get('/home', homepageController.getHomepage);
 router.get('/products', productsController.getProducts);
+router.get('/description', productsController.getProdDesc);
 
 /****************************************************
  * POST Routes

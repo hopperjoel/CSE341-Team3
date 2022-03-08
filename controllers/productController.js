@@ -8,7 +8,16 @@
 /****************************************************
  * GET Controllers
  ****************************************************/
+// Get Products
+exports.getProducts = (req, res, next) => {
+    var productJSON = Product.find({});
+    console.log(productJSON);
+};
 
+// Get Product Description
+exports.getProdDesc = (req, res, next) => {
+
+} 
 
 /****************************************************
  * POST Controllers
