@@ -34,7 +34,21 @@ exports.getHomepage = (req, res, next) => {
     //     }) 
     
 exports.getProducts = (req, res, next) => {
-    
+    Product
+        .find()
+        .then(products => {
+            console.log(products);
+        })
+        .catch(err => {
+            const error = new Error(err);
+            error.httpStatusCode = 204; // Error Code 204: No Content
+            res
+                .status(204)
+                .json{
+                    status: "204",
+                    message: "No content available"
+                }
+        });
 }
 /****************************************************
  * POST Controllers
