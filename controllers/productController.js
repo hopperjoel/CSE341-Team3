@@ -48,18 +48,44 @@ exports.getProducts = (req, res, next) => {
         })
         // No Content
         .catch(err => {
+            const error = new Error(err);
+            error.httpStatusCode = 204;
+            error.message = "No Content Available";
+
             res
                 .status(204)    //HTTP status 204: No content available
                 .json({
                     status: "204",
-                    message: "No content available"
+                    message: error
                 });
         });
 }
 
 // GET Prdouct Description
 exports.getProdDesc = (req, res, next) => {
+    Product
+        .find( {"_id": "6226c42cadeab28915b23328"} ) // ID hard coded for now
+        .then(product => {
+            res
+                .status(200)
+                .json({
+                    status: "200",
+                    message: "Product found",
+                    product
+                })
+        })
+        .catch(err => {
+            const error = new Error(err);
+            error.httpStatusCode = 204;
+            error.message = "Content not found";
 
+            res
+                .status(204)    //HTTP status 204: No content available
+                .json({
+                    status: "204",
+                    message: error
+                });
+        });
 }
 
 /****************************************************
