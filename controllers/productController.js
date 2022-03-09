@@ -32,24 +32,36 @@ exports.getHomepage = (req, res, next) => {
     //           //Do I need to add a message here for get?  message: ''
     //         })
     //     }) 
-    
+
+// GET Products
 exports.getProducts = (req, res, next) => {
     Product
         .find()
         .then(products => {
-            console.log(products);
-        })
-        .catch(err => {
-            const error = new Error(err);
-            error.httpStatusCode = 204; // Error Code 204: No Content
             res
-                .status(204)
-                .json{
+                .status(200)
+                .json({
+                    status: "200",
+                    message: "All products returned",
+                    products
+                });
+        })
+        // No Content
+        .catch(err => {
+            res
+                .status(204)    //HTTP status 204: No content available
+                .json({
                     status: "204",
                     message: "No content available"
-                }
+                });
         });
 }
+
+// GET Prdouct Description
+exports.getProdDesc = (req, res, next) => {
+
+}
+
 /****************************************************
  * POST Controllers
  ****************************************************/
