@@ -32,26 +32,60 @@ exports.getHomepage = (req, res, next) => {
     //           //Do I need to add a message here for get?  message: ''
     //         })
     //     }) 
-    
-exports.getProducts = (req, res, next) => {
 
-    //could have some sort of query function to display additional message for quantity=0 or quantity <10
-    //I'll also probably change this to async, await
-    return Products.find()
-        .then(result => {
-            res.status(200).json({
-                message: "Products request successful",
-                title: result.title,
-                price: result.price,
-                quantity: result.quantity,
-                image: result.image,
-                description: result.description
-            })
+// GET Products
+exports.getProducts = (req, res, next) => {
+    Product
+        .find()
+        .then(products => {
+            res
+                .status(200)
+                .json({
+                    status: "200",
+                    message: "All products returned",
+                    products
+                });
         })
+        // No Content
+        .catch(err => {
+            const error = new Error(err);
+            error.httpStatusCode = 204;
+            error.message = "No Content Available";
+
+            res
+                .status(204)    //HTTP status 204: No content available
+                .json({
+                    status: "204",
+                    message: error
+                });
+        });
 }
 
-exports.getCart = (req, res, next) => {
+// GET Prdouct Description
+exports.getProdDesc = (req, res, next) => {
+    Product
+        .find( {"_id": "6226c42cadeab28915b23328"} ) // ID hard coded for now
+        .then(product => {
+            res
+                .status(200)
+                .json({
+                    status: "200",
+                    message: "Product found",
+                    product
+                })
+        })
+        .catch(err => {
+            const error = new Error(err);
+            error.httpStatusCode = 204;
+            error.message = "Content not found";
 
+            res
+                .status(204)    //HTTP status 204: No content available
+                .json({
+                    status: "204",
+                    message: error
+                });
+        });
 }
 
 /****************************************************

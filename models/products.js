@@ -24,5 +24,4 @@ const productSchema = new Schema({
     //That would be for the "popular items" that display on the homepage
 })
 
-
 module.exports = mongoose.model('Products', productSchema);
