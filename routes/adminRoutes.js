@@ -1,10 +1,10 @@
 /****************************************************
  * Admin Routes
  ***************************************************/
-const express = require('express')
+const express = require('express');
 const adminController = require('../controllers/adminController');
 
-const router = express.Router()
+const router = express.Router();
 
 /****************************************************
  * GET Routes
