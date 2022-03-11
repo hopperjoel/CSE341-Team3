@@ -57,9 +57,10 @@ exports.getProducts = (req, res, next) => {
             res
                 .status(200)
                 .json({
-                    status: "200",
                     message: "All products returned",
-                    products
+                    products,
+                    error: "NULL",
+                    isLoggedIn: "" 
                 });
         })
         // No Content
@@ -71,8 +72,16 @@ exports.getProducts = (req, res, next) => {
             res
                 .status(204)    //HTTP status 204: No content available
                 .json({
-                    status: "204",
-                    message: error
+                    message: "No content available",
+                    products: [{
+                        _id: "NULL",
+                        price: 0,
+                        description: "NULL",
+                        image: "NULL",
+                        __v: 0
+                    }],
+                    error: error,
+                    isLoggedIn: ""
                 });
         });
 }
@@ -85,9 +94,10 @@ exports.getProdDesc = (req, res, next) => {
             res
                 .status(200)
                 .json({
-                    status: "200",
                     message: "Product found",
-                    product
+                    product,
+                    error: "NULL",
+                    isLoggedIn: "" 
                 })
         })
         .catch(err => {
@@ -98,8 +108,16 @@ exports.getProdDesc = (req, res, next) => {
             res
                 .status(204)    //HTTP status 204: No content available
                 .json({
-                    status: "204",
-                    message: error
+                    message: "No content available",
+                    products: [{
+                        _id: "NULL",
+                        price: 0,
+                        description: "NULL",
+                        image: "NULL",
+                        __v: 0
+                    }],
+                    error: error,
+                    isLoggedIn: ""
                 });
         });
 }
