@@ -4,36 +4,21 @@
  * Controller for admin functions including adding,
  * editing, or deleting products
  ***************************************************/
-const Products = require('../models/products');
+const Product = require('../models/products');
 
 //Not sure about requiring express-validator with using API's?
 
 /****************************************************
  * GET Controllers
  ****************************************************/
-exports.getProducts = (req, res, next) => {
-
-    //could have some sort of query function to display additional message for quantity=0 or quantity <10
-    //I'll also probably change this to async, await
-    return Products.find()
-        .then(result => {
-            res.status(200).json({
-                message: "Products request successful",
-                title: result.title,
-                price: result.price,
-                quantity: result.quantity,
-                image: result.image,
-                description: result.description
-            })
-        })
-}
 
 exports.getEditProduct = (req, res, next) => {
-
-}
-
-exports.getCart = (req, res, next) => {
-
+    const productId = req.body.productId;
+    Product.findById(productId)
+        .then(result => {
+            return res.status(200).json({result})
+        })
+        .catch(err => {console.log(err)})
 }
 
 /****************************************************
@@ -47,7 +32,7 @@ exports.putAddProduct = (req, res, next) => {
 
     // not sure how to handle errors...
 
-    const product = new Products({
+    const product = new Product({
         title: title,
         price: price,
         description: description,
@@ -90,6 +75,7 @@ exports.postEditProduct = (req, res, next) => {
 
 
 exports.postDeleteProduct = (req, res, next) => {
+    const productId = req.body.productId;
 
 };
 

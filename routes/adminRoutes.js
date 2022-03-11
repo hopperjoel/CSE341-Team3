@@ -9,16 +9,15 @@ const router = express.Router()
 /****************************************************
  * GET Routes
  ****************************************************/
-router.get('/admin-products', adminController.getProducts);
 
 router.get('/edit-product', adminController.getEditProduct);
-
-router.get('/cart', adminController.getCart);
 
 /****************************************************
  * POST Routes
  ****************************************************/
 
+ router.put('/add-product', adminController.putAddProduct);
+ router.post('/edit-product', adminController.postEditProduct);
+ router.post('/delete-product', adminController.postDeleteProduct);
 
-router.put('/add-product', adminController.putAddProduct);
 module.exports = router;
