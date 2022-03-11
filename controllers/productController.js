@@ -21,6 +21,22 @@ exports.getHomepage = (req, res, next) => {
             })
         })
 };
+
+//****McKenzie***
+//to select random products and display them
+//still need to switch it to 3 items...(create a loop for 3 times?)
+// Create array of object keys, ["311", "310", ...]
+// const keys = Object.keys(products)
+
+// // Generate random index based on number of keys
+// const randIndex = Math.floor(Math.random() * keys.length)
+
+// // Select a key from the array of keys using the random index
+// const randKey = keys[randIndex]
+
+// // Use the key to get the corresponding name from the "names" object
+// const products = products[randKey]
+
     // const product = homeProduct({
     //     title: title,
     //     image: image
