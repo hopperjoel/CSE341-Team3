@@ -13,7 +13,8 @@ const Product = require('../models/products');
  ****************************************************/
 
 exports.getEditProduct = (req, res, next) => {
-    const productId = req.body.productId;
+    const productId = "6226c42cadeab28915b23328";
+    //const productId = req.body.productId;
     Product.findById(productId)
         .then(result => {
             return res.status(200).json({result})
@@ -48,13 +49,11 @@ exports.putAddProduct = (req, res, next) => {
 };
 
 exports.postEditProduct = (req, res, next) => {
-    const productId = req.body.productId;
+    const productId = req.body._id;
     const newTitle = req.body.title;
     const newPrice = req.body.price;
     const newDescription = req.body.description;
     const newImage = req.body.image;
-
-    // not sure how to handle errors...
 
     const product = new Product({
         title: newTitle,
@@ -64,13 +63,23 @@ exports.postEditProduct = (req, res, next) => {
     });
 
     Product.findById(productId)
-    product
-        .save()
+        .then((product) => {
+            product.title = newTitle;
+            product.price = newPrice;
+            product.imageURL = newImage;
+            product.description = newDescription;
+            product.save();
+        })
         .then((result) => {
             res.status(201).json({
                 message: 'Product Successfully Edited'
             })
-        }) 
+        })
+        .catch((err) => {
+            res.status(404).json({
+                message: 'Product Not Found'
+            })
+        });
 };
 
 
