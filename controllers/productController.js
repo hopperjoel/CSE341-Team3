@@ -9,14 +9,23 @@ const Product = require('../models/products');
 /****************************************************
  * GET Controllers
  ****************************************************/
-exports.getHomepage = (req, res, next) => {
-    return products.find() //findById() to get certain items?
+ exports.getHomepage = (req, res, next) => {
+    Product
+        .find( 
+        {"_id": "622fecb632cc9c150e23bb9c"},
+        {"_id": "622fecd032cc9c150e23bb9"},
+        {"_id": "622fece432cc9c150e23bba0"}
+    )
+
+    //const prod1 = id:622fecb632cc9c150e23bb9c;
+    //const prod2 = id:622fecd032cc9c150e23bb9;
+    //const prod3 = id:622fece432cc9c150e23bba0;
+    //findById() to get certain items?
         .then(result => {
             res.status(200).json({ //add in an error message?
                 message: "Home display products request successful",
                 title: result.title,
                 image: result.image,
-                description: result.description
                 //thinking maybe you don't need the price for the home page display?
             })
         })
