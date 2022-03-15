@@ -13,8 +13,7 @@ const Product = require('../models/products');
  ****************************************************/
 
 exports.getEditProduct = (req, res, next) => {
-    const productId = "6226c42cadeab28915b23328";
-    //const productId = req.body.productId;
+    const productId = req.body.productId;
     Product.findById(productId)
         .then(result => {
             return res.status(200).json({result})
@@ -31,9 +30,13 @@ exports.putAddProduct = (req, res, next) => {
     const description = req.body.description;
     const image = req.body.image;
     const userId = req.userId;
-
+    
+    if (!userId) {
+        res.status(401).json({
+            message: "Not authorized to perform this action"
+        })
+    }
     // not sure how to handle errors...
-
     const product = new Product({
         title: title,
         price: price,
@@ -46,6 +49,11 @@ exports.putAddProduct = (req, res, next) => {
         .then((result) => {
             res.status(201).json({
                 message: 'Product Successfully Added'
+            })
+        })
+        .catch(err => {
+            res.status(400).json({
+                message: `Unable to complete request due to ${err}`
             })
         }) 
 };
@@ -78,15 +86,30 @@ exports.postEditProduct = (req, res, next) => {
             })
         })
         .catch((err) => {
-            res.status(404).json({
-                message: 'Product Not Found'
+            res.status(400).json({
+                message: `Unable to complete request due to ${err}`
             })
         });
 };
 
+// Do we want to add functionality to delete multiple products at once??
 
 exports.postDeleteProduct = (req, res, next) => {
     const productId = req.body.productId;
-
+    if (!req.userId) {
+        res.status(401).json({
+            message: "Not authorized to perform this action"
+        })
+    } 
+    Product.findByIdAndDelete(productId)
+    .then((result) => {
+        res.status(201).json({
+            message: "Product Successfully Deleted"
+        })
+    })
+    .catch(err => {
+        res.status(400).json({
+            message: `Unable to complete request due to ${err}`
+        })
+    })
 };
-
