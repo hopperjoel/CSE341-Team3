@@ -19,9 +19,14 @@ const productSchema = new Schema({
     image: {
         type: String,
         required: true
-    }
+    },
     //Do we need to add another field with the number of purchases?
     //That would be for the "popular items" that display on the homepage
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }
 })
 
 module.exports = mongoose.model('Products', productSchema);

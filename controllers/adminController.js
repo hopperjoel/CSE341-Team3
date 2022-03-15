@@ -30,6 +30,7 @@ exports.putAddProduct = (req, res, next) => {
     const price = req.body.price;
     const description = req.body.description;
     const image = req.body.image;
+    const userId = req.userId;
 
     // not sure how to handle errors...
 
@@ -37,7 +38,8 @@ exports.putAddProduct = (req, res, next) => {
         title: title,
         price: price,
         description: description,
-        image: image
+        image: image,
+        userId: userId
     });
     product
         .save()
@@ -59,7 +61,7 @@ exports.postEditProduct = (req, res, next) => {
         title: newTitle,
         price: newPrice,
         description: newDescription,
-        image: newImage
+        image: newImage,
     });
 
     Product.findById(productId)
