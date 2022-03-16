@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
     if (!authHeader) {
         // err.statusCode = 401;
         // throw error;
-        req.userId = "1"
+        
         next()
     }
     const token = req.get('Authorization').split(' ')[1];

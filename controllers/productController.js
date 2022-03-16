@@ -5,6 +5,7 @@
  ***************************************************/
 //const products = require('../models/products');
 const Product = require('../models/products');
+const User = require('../models/users')
 
 /****************************************************
  * GET Controllers
@@ -21,10 +22,32 @@ const Product = require('../models/products');
             products = result.slice(0, 3)
             res.status(200).json({ //add in an error message?
                 message: "Home display products request successful",
-                products: products
+                products: products,
+                error: "NULL",
+                isLoggedIn: ""
                 //thinking maybe you don't need the price for the home page display?
             })
         })
+        .catch(err => {
+            const error = new Error(err);
+            error.httpStatusCode = 204;
+            error.message = "No Content Available";
+
+            res
+                .status(204)    //HTTP status 204: No content available
+                .json({
+                    message: "No content available",
+                    products: [{
+                        _id: "NULL",
+                        price: 0,
+                        description: "NULL",
+                        image: "NULL",
+                        __v: 0
+                    }],
+                    error: error,
+                    isLoggedIn: ""
+                });
+        });
 };
 
 //****McKenzie***
@@ -127,7 +150,109 @@ exports.getProdDesc = (req, res, next) => {
         });
 }
 
+
+exports.getCart = (req, res, next) => {
+    userId = req.userId;
+    User
+    .find( { "_id": userId } )
+    .then(user => {
+        res
+            .status(200)
+            .json({
+                message: "User Cart found",
+                cart: user.cart,
+                error: "NULL",
+                isLoggedIn: "" 
+            })
+    })
+    .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 204;
+        error.message = "Content not found";
+
+        res
+            .status(204)    //HTTP status 204: No content available
+            .json({
+                message: "No content available",
+                products: [{
+                    _id: "NULL",
+                    price: 0,
+                    description: "NULL",
+                    image: "NULL",
+                    __v: 0
+                }],
+                error: error,
+                isLoggedIn: ""
+            });
+        });
+};
 /****************************************************
  * POST Controllers
  ****************************************************/
+exports.postCart = (req, res, next) => {
+    const userId = req.userId;
+    const prodId = req.body.productId;
+    console.log('Test 1')
+    Product.find({ "_id": prodId })
+    .then(product => {
+        console.log('Test 6')
+        User
+        .find( { "_id": userId } )
+        .then(user => {
+            console.log('Test 5')
+            console.log(product)
+            User.addToCart(product)
+            res
+                .status(200)
+                .json({
+                    message: "User Cart found",
+                    cart: user.cart,
+                    error: "NULL",
+                    isLoggedIn: "" 
+                })
+        })
+        .catch(err => {
+            console.log('Test 4')
+            const error = new Error(err);
+            error.httpStatusCode = 204;
+            error.message = "Content not found";
 
+            res
+                .status(204)    //HTTP status 204: No content available
+                .json({
+                    message: "No content available",
+                    products: [{
+                        _id: "NULL",
+                        price: 0,
+                        description: "NULL",
+                        image: "NULL",
+                        __v: 0
+                    }],
+                    error: error,
+                    isLoggedIn: ""
+                });
+            });
+    })
+    .catch(err => {
+        console.log('Test 3')
+        const error = new Error(err);
+        error.httpStatusCode = 204;
+        error.message = "Content not found";
+
+        res
+            .status(204)    //HTTP status 204: No content available
+            .json({
+                message: "No content available",
+                products: [{
+                    _id: "NULL",
+                    price: 0,
+                    description: "NULL",
+                    image: "NULL",
+                    __v: 0
+                }],
+                error: error,
+                isLoggedIn: ""
+            });
+        });
+        console.log('Test 2')
+    };
