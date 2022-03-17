@@ -6,6 +6,24 @@
  ***************************************************/
 const Product = require('../models/products');
 
+// ***Linds***//
+// exports.getProducts = (req, res, next) => {
+//     Product.find({ userId: req.user._id })
+//       .then(products => {
+//         console.log(products);
+//         res.render('admin/products', {
+//           prods: products,
+//           pageTitle: 'Admin Products',
+//           path: '/admin/products'
+//         });
+//       })
+//       .catch(err => {
+//         const error = new Error(err);
+//         error.httpStatusCode = 500;
+//         return next(error);
+//       });
+//   };
+
 //Not sure about requiring express-validator with using API's?
 
 /****************************************************
