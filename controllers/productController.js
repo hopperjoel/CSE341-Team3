@@ -193,24 +193,26 @@ exports.postCart = (req, res, next) => {
     const userId = req.userId;
     const prodId = req.body.productId;
     console.log('Test 1')
-    Product.find({ "_id": prodId })
+    Product.findById(prodId)
     .then(product => {
         console.log('Test 6')
         User
-        .find( { "_id": userId } )
+        .findById(userId)
         .then(user => {
             console.log('Test 5')
             console.log(product)
-            User.addToCart(product)
+            console.log(user)
+            user.addToCart(product)
             res
-                .status(200)
-                .json({
-                    message: "User Cart found",
-                    cart: user.cart,
-                    error: "NULL",
-                    isLoggedIn: "" 
-                })
+            .status(200)
+            .json({
+                message: "User Cart found",
+                cart: user.cart,
+                error: "NULL",
+                isLoggedIn: "" 
+            })
         })
+        
         .catch(err => {
             console.log('Test 4')
             const error = new Error(err);
