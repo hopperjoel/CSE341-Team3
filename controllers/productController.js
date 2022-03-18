@@ -154,16 +154,33 @@ exports.getProdDesc = (req, res, next) => {
 exports.getCart = (req, res, next) => {
     userId = req.userId;
     User
-    .find( { "_id": userId } )
-    .then(user => {
-        res
+    .findById(userId)
+    .then(passedUser => {
+        passedUser
+        .populate('cart.items.productId')
+        .then(user => {
+          const products = user.cart.items;
+          res
             .status(200)
             .json({
                 message: "User Cart found",
-                cart: user.cart,
+                cart: products,
                 error: "NULL",
                 isLoggedIn: "" 
             })
+        })
+        .catch(err => {
+          const error = new Error(err);
+          error.httpStatusCode = 500;
+          res
+            .status(200)
+            .json({
+                message: "User Cart not found",
+                
+                error: "NULL",
+                isLoggedIn: "" 
+            })
+        });
     })
     .catch(err => {
         const error = new Error(err);
@@ -192,16 +209,11 @@ exports.getCart = (req, res, next) => {
 exports.postCart = (req, res, next) => {
     const userId = req.userId;
     const prodId = req.body.productId;
-    console.log('Test 1')
     Product.findById(prodId)
     .then(product => {
-        console.log('Test 6')
         User
         .findById(userId)
         .then(user => {
-            console.log('Test 5')
-            console.log(product)
-            console.log(user)
             user.addToCart(product)
             res
             .status(200)
@@ -214,7 +226,6 @@ exports.postCart = (req, res, next) => {
         })
         
         .catch(err => {
-            console.log('Test 4')
             const error = new Error(err);
             error.httpStatusCode = 204;
             error.message = "Content not found";
@@ -236,7 +247,6 @@ exports.postCart = (req, res, next) => {
             });
     })
     .catch(err => {
-        console.log('Test 3')
         const error = new Error(err);
         error.httpStatusCode = 204;
         error.message = "Content not found";
@@ -256,5 +266,4 @@ exports.postCart = (req, res, next) => {
                 isLoggedIn: ""
             });
         });
-        console.log('Test 2')
     };
