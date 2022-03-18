@@ -6,7 +6,7 @@ const adminRoutes = require('./routes/adminRoutes');
 const authRoutes  = require('./routes/loginRoutes');
 const shopRoutes  = require('./routes/productRoutes');
 
-const MONGODB_URL = "mongodb+srv://admin:admin@cluster0.9h2tp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const MONGODB_URL = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_URL}`
 
 const app = express();
 
@@ -26,8 +26,11 @@ app.use(shopRoutes);
 mongoose
   .connect(MONGODB_URL)
   .then(result => {
-    app.listen(8080);
+    app.listen(process.env.PORT || 8080);
   })
   .catch(err => {
     console.log(err);
   });
+
+//For package.json production env vars
+//"start": "MONGO_USER=admin MONGO_PASSWORD=admin MONGO_URL=cluster0.9h2tp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority PATH=3000 node app.js",
