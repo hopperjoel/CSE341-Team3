@@ -6,9 +6,7 @@ const adminRoutes = require('./routes/adminRoutes');
 const authRoutes  = require('./routes/loginRoutes');
 const shopRoutes  = require('./routes/productRoutes');
 
-
 const MONGODB_URL = "mongodb+srv://admin:admin@cluster0.9h2tp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-
 
 const app = express();
 
@@ -24,7 +22,6 @@ app.use((req, res, next) => {
 app.use(adminRoutes);
 app.use(authRoutes);
 app.use(shopRoutes);
-
 
 mongoose
   .connect(MONGODB_URL)
