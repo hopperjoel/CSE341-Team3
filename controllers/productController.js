@@ -267,3 +267,62 @@ exports.postCart = (req, res, next) => {
             });
         });
     };
+
+exports.deleteFromCart = (req, res, next) => {
+    const userId = req.userId
+    const prodId = req.body.productId;
+    User
+    .findById(userId)
+    .then(user => {
+        user.removeFromCart(prodId)
+        .then(result => {
+            res
+            .status(200)
+            .json({
+                message: "Product deleted",
+                error: "NULL",
+                isLoggedIn: "" 
+            })
+        })
+        .catch(err => {
+            const error = new Error(err);
+        error.httpStatusCode = 204;
+        error.message = "Content not found";
+
+        res
+            .status(204)    //HTTP status 204: No content available
+            .json({
+                message: "No content available",
+                products: [{
+                    _id: "NULL",
+                    price: 0,
+                    description: "NULL",
+                    image: "NULL",
+                    __v: 0
+                }],
+                error: error,
+                isLoggedIn: ""
+            });
+        });
+    })
+    .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 204;
+        error.message = "Content not found";
+
+        res
+            .status(204)    //HTTP status 204: No content available
+            .json({
+                message: "No content available",
+                products: [{
+                    _id: "NULL",
+                    price: 0,
+                    description: "NULL",
+                    image: "NULL",
+                    __v: 0
+                }],
+                error: error,
+                isLoggedIn: ""
+            });
+        });
+}

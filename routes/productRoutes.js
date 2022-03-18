@@ -19,4 +19,5 @@ router.get('/description', productsController.getProdDesc);
  ****************************************************/
 router.get('/cart', middleware, productsController.getCart);
 router.post('/cart', middleware, productsController.postCart);
+router.delete('/cart', middleware, productsController.deleteFromCart);
 module.exports = router;
