@@ -75,7 +75,7 @@ exports.postLogin = (req, res, next) => {
         .compare(password, user.password)
         .then(doMatch => {
         if (doMatch) {
-            const token = jwt.sign({ email: email, userId: user._id }, 'asjdkflajsdlkfjalksdfj', { expiresIn: '100h' });
+            const token = jwt.sign({ email: email, userId: user._id }, `${process.env.USER_KEY}`, { expiresIn: '100h' });
             res.json({ token: token, userId: user._id })
         }
         else { 

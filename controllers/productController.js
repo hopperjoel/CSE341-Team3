@@ -50,33 +50,6 @@ const User = require('../models/users')
         });
 };
 
-//****McKenzie***
-//to select random products and display them
-//still need to switch it to 3 items...(create a loop for 3 times?)
-// Create array of object keys, ["311", "310", ...]
-// const keys = Object.keys(products)
-
-// // Generate random index based on number of keys
-// const randIndex = Math.floor(Math.random() * keys.length)
-
-// // Select a key from the array of keys using the random index
-// const randKey = keys[randIndex]
-
-// // Use the key to get the corresponding name from the "names" object
-// const products = products[randKey]
-
-    // const product = homeProduct({
-    //     title: title,
-    //     image: image
-    // });
-    // product
-    //     .save()
-    //     .then((result) => {
-    //         res.status(200).json({
-    //           //Do I need to add a message here for get?  message: ''
-    //         })
-    //     }) 
-
 // GET Products
 exports.getProducts = (req, res, next) => {
     Product
@@ -117,7 +90,7 @@ exports.getProducts = (req, res, next) => {
 // GET Prdouct Description
 exports.getProdDesc = (req, res, next) => {
     Product
-        .find( {"_id": "6226c42cadeab28915b23328"} ) // ID hard coded for now
+        .findById( req.body.productId ) // ID hard coded for now
         .then(product => {
             res
                 .status(200)
@@ -150,9 +123,8 @@ exports.getProdDesc = (req, res, next) => {
         });
 }
 
-
 exports.getCart = (req, res, next) => {
-    userId = req.userId;
+    const userId = req.body.userId;
     User
     .findById(userId)
     .then(passedUser => {
