@@ -12,6 +12,11 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    securityLevel: {
+        type: Number,
+        required: true,
+        default: 0
+    },
     cart: {
         items: [
           {
