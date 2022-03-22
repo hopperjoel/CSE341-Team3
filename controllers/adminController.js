@@ -5,6 +5,7 @@
  * editing, or deleting products
  ***************************************************/
 const Product = require('../models/products');
+var fs = require('fs'); // File System
 
 // ***Linds***//
 // exports.getProducts = (req, res, next) => {
