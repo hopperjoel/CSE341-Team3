@@ -27,6 +27,12 @@ var fs = require('fs'); // File System
 
 //Not sure about requiring express-validator with using API's?
 
+
+/* base64_encode */
+function base64_encode(file) {
+    return fs.readFileSync(file, 'base64'); // Returns the image as a base64 encoded string
+}
+
 /****************************************************
  * GET Controllers
  ****************************************************/
@@ -60,7 +66,7 @@ exports.putAddProduct = (req, res, next) => {
         title: title,
         price: price,
         description: description,
-        image: image,
+        image: base64_encode(image),
         userId: userId
     });
     product
@@ -88,14 +94,14 @@ exports.postEditProduct = (req, res, next) => {
         title: newTitle,
         price: newPrice,
         description: newDescription,
-        image: newImage,
+        image: base64_encode(newImage),
     });
 
     Product.findById(productId)
         .then((product) => {
             product.title = newTitle;
             product.price = newPrice;
-            product.imageURL = newImage;
+            product.imageURL = base64_encode(newImage);
             product.description = newDescription;
             product.save();
         })
