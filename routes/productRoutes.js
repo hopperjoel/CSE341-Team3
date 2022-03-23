@@ -13,6 +13,7 @@ const router = express.Router();
 router.get('/home', productsController.getHomepage);
 router.get('/products', productsController.getProducts);
 router.get('/description', productsController.getProdDesc);
+router.get('/search', productsController.searchProduct);
 
 /****************************************************
  * POST Routes

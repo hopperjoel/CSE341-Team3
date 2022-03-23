@@ -87,6 +87,25 @@ exports.getProducts = (req, res, next) => {
         });
 }
 
+exports.searchProduct = (req, res, next) => {
+    let searchTerm = req.body.searchTerm;
+    Product
+        .find()
+        .then(products => {
+            const newProducts = []
+            products.forEach(product => {
+                if (product.title.toLowerCase().indexOf(searchTerm) !== -1) {
+                    newProducts.push(product);
+                }
+                else if (product.description.toLowerCase().indexOf(searchTerm) !== -1) {
+                    newProducts.push(product);
+                }
+            })
+        
+            res.json({ newProducts })
+        })
+}
+
 // GET Prdouct Description
 exports.getProdDesc = (req, res, next) => {
     Product
