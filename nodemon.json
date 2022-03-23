@@ -2,7 +2,7 @@
     "env": {
         "MONGO_USER": "admin",
         "MONGO_PASSWORD": "admin",
-        "MONGO_URL": "cluster0.9h2tp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+        "MONGO_URI": "cluster0.9h2tp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
         "PORT": 8080,
         "USER_KEY": "asjdkflajsdlkfjalksdfj"
     }

@@ -1,14 +1,30 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require("path");
+const fs = require('fs');
+const helmet = require('helmet');
+const morgan = require('morgan');
 
 const adminRoutes = require('./routes/adminRoutes');
 const authRoutes  = require('./routes/loginRoutes');
 const shopRoutes  = require('./routes/productRoutes');
 
-const MONGODB_URL = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_URL}`
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, 'access.log'),
+  { flags: 'a' }
+)
+
+const MONGODB_URL = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_URI}`
 
 const app = express();
+
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true
+  })
+)
+app.use(morgan('combined', {stream: accessLogStream}));
 
 app.use(bodyParser.json());
 
