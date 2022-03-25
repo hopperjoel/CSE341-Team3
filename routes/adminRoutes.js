@@ -11,6 +11,7 @@ const router = express.Router();
  * GET Routes
  ****************************************************/
 
+router.get('/admin-products', middleware, adminController.getProducts)
 router.get('/edit-product', middleware, adminController.getEditProduct);
 
 /****************************************************
