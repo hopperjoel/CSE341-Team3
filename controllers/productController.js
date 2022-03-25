@@ -143,7 +143,7 @@ exports.getProdDesc = (req, res, next) => {
 }
 
 exports.getCart = (req, res, next) => {
-    const userId = req.body.userId;
+    const userId = req.userId;
     User
     .findById(userId)
     .then(passedUser => {
