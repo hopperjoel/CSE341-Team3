@@ -69,7 +69,7 @@ exports.postLogin = (req, res, next) => {
     User.findOne({ email: email })
     .then(user => {
     if (!user) {
-        return res.status(422).json({ error: "User not found or There was an error 1" }) //Do we need to change these errors?
+        return res.status(422).json({ error: "User not found." }) //Do we need to change these errors?
     }
     bcrypt
         .compare(password, user.password)
@@ -79,12 +79,12 @@ exports.postLogin = (req, res, next) => {
             res.json({ token: token, userId: user._id })
         }
         else { 
-            return res.status(422).json({ error: "There was an error 2" })
+            return res.status(422).json({ error: "Invalid Password." })
             }
         })
         .catch(err => {
-            console.log(err);
-            res.status(422).json({ error: "There was an error 3" });
+            const error = new Error(err)
+            res.status(422).json({ error: "There was an error.", error });
         });
     })
     .catch(err => {
