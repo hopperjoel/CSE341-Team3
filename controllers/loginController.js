@@ -11,7 +11,7 @@
  * GET Controllers
  ****************************************************/
 exports.getLogin = (req, res, next) => {
-
+    
 }
 
 /****************************************************
@@ -55,7 +55,6 @@ const password = req.body.password;
 };
 
 
-//****** Linds ******//
 exports.postLogin = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -102,5 +101,5 @@ exports.postLogout = (req, res, next) => {
       res.redirect('/');
     });
   };
-//****** Linds ******//
+
 

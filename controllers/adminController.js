@@ -7,7 +7,7 @@
 const Product = require('../models/products');
 var fs = require('fs'); // File System
 
-// ***Linds***//
+
 exports.getProducts = (req, res, next) => {
     Product.find({ userId: req.userId })
       .then(products => {
