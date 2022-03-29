@@ -40,6 +40,8 @@ function base64_encode(file) {
  * GET Controllers
  ****************************************************/
 
+// Endpoint the retrieves a product
+
 exports.getEditProduct = (req, res, next) => {
     const productId = req.body.productId;
     Product.findById(productId)
@@ -52,6 +54,9 @@ exports.getEditProduct = (req, res, next) => {
 /****************************************************
  * POST Controllers
  ****************************************************/
+
+// Add a product
+
 exports.putAddProduct = (req, res, next) => {
     const title = req.body.title;
     const price = req.body.price;
@@ -85,6 +90,8 @@ exports.putAddProduct = (req, res, next) => {
             })
         }) 
 };
+
+// Editing a product
 
 exports.postEditProduct = (req, res, next) => {
     const productId = req.body._id;
@@ -120,7 +127,7 @@ exports.postEditProduct = (req, res, next) => {
         });
 };
 
-// Do we want to add functionality to delete multiple products at once??
+// Endpoint for deleting products
 
 exports.postDeleteProduct = (req, res, next) => {
     const productId = req.body.productId;
