@@ -21,3 +21,4 @@
 ::1 - - [24/Mar/2022:03:01:03 +0000] "DELETE /cart HTTP/1.1" 200 60 "-" "PostmanRuntime/7.29.0"
 ::1 - - [24/Mar/2022:03:01:07 +0000] "GET /cart HTTP/1.1" 200 70 "-" "PostmanRuntime/7.29.0"
 ::1 - - [24/Mar/2022:03:03:06 +0000] "GET /home HTTP/1.1" 200 578 "-" "PostmanRuntime/7.29.0"
+

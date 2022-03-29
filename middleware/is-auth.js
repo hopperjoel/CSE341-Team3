@@ -4,8 +4,9 @@ module.exports = (req, res, next) => {
     authHeader = req.get('Authorization');
     console.log(authHeader)
     if (!authHeader) {
-        // err.statusCode = 401;
-        // throw error;
+        const err = new Error('No Authorization Header')
+        err.statusCode = 401;
+        throw err;
         
         next()
     }
@@ -15,15 +16,16 @@ module.exports = (req, res, next) => {
         decodedToken = jwt.verify(token, `${process.env.USER_KEY}`);
     }
     catch (err) {
-        // err.statusCode = 500;
-        // throw err;
+        const error = new Error(err)
+        error.statusCode = 500;
+        throw err;
         req.userId = "2"
         next()
     }
     if (!decodedToken) {
-        // const error = new Error('Not authenticated.');
-        // error.statusCode = 401;
-        // throw error;
+        const error = new Error('Not authenticated.');
+        error.statusCode = 401;
+        throw error;
         req.userId = "3"
         next()
     }

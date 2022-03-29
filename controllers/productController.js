@@ -48,39 +48,33 @@ const User = require('../models/users')
 
 // GET Products
 exports.getProducts = (req, res, next) => {
-    Product
-        .find()
-        .then(products => {
+    const page = +req.query.page || 1;
+    const ITEMS_PER_PAGE = 10;
+    let totalItems;
+    Product.find()
+        .countDocuments()
+        .then(numProducts => {
+            totalItems = numProducts;
+            return Product
+                .find()
+                .skip((page - 1) * ITEMS_PER_PAGE)
+                .limit(ITEMS_PER_PAGE)
+            }).then(products => {
             res
-                .status(200)
-                .json({
-                    message: "All products returned",
-                    products,
-                    error: "NULL",
-                    isLoggedIn: "" 
-                });
-        })
-        // No Content
-        .catch(err => {
-            const error = new Error(err);
-            error.httpStatusCode = 204;
-            error.message = "No Content Available";
-
-            res
-                .status(204)    //HTTP status 204: No content available
-                .json({
-                    message: "No content available",
-                    products: [{
-                        _id: "NULL",
-                        price: 0,
-                        description: "NULL",
-                        image: "NULL",
-                        __v: 0
-                    }],
-                    error: error,
-                    isLoggedIn: ""
-                });
+            .status(200)
+            .json({
+                message: "All products returned",
+                products,
+                error: "NULL",
+                isLoggedIn: "",
+                currentPage: page,
+                hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+                hasPreviousPage: page > 1,
+                nextPage: page + 1,
+                previousPage: page - 1,
+                lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
         });
+    })
 }
 
 exports.searchProduct = (req, res, next) => {
@@ -139,7 +133,7 @@ exports.getProdDesc = (req, res, next) => {
 }
 
 exports.getCart = (req, res, next) => {
-    const userId = req.body.userId;
+    const userId = req.userId;
     User
     .findById(userId)
     .then(passedUser => {
@@ -196,12 +190,14 @@ exports.getCart = (req, res, next) => {
 exports.postCart = (req, res, next) => {
     const userId = req.userId;
     const prodId = req.body.productId;
+    const quantity = Math.floor(req.body.quantity);
     Product.findById(prodId)
     .then(product => {
         User
         .findById(userId)
         .then(user => {
-            user.addToCart(product)
+            user.addToCart(product, quantity)
+            
             res
             .status(200)
             .json({
@@ -258,15 +254,19 @@ exports.postCart = (req, res, next) => {
 exports.deleteFromCart = (req, res, next) => {
     const userId = req.userId
     const prodId = req.body.productId;
+    const quantity = Math.floor(req.body.quantity);
     User
     .findById(userId)
     .then(user => {
-        user.removeFromCart(prodId)
+        user.removeFromCart(prodId, quantity)
+        
         .then(result => {
+            const products = user.cart.items;
             res
             .status(200)
             .json({
                 message: "Product deleted",
+                products: products, 
                 error: "NULL",
                 isLoggedIn: "" 
             })
