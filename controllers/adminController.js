@@ -7,27 +7,6 @@
 const Product = require('../models/products');
 var fs = require('fs'); // File System
 
-// ***Linds***//
-// exports.getProducts = (req, res, next) => {
-//     Product.find({ userId: req.user._id })
-//       .then(products => {
-//         console.log(products);
-//         res.render('admin/products', {
-//           prods: products,
-//           pageTitle: 'Admin Products',
-//           path: '/admin/products'
-//         });
-//       })
-//       .catch(err => {
-//         const error = new Error(err);
-//         error.httpStatusCode = 500;
-//         return next(error);
-//       });
-//   };
-
-//Not sure about requiring express-validator with using API's?
-
-
 /* base64_encode */
 function base64_encode(file) {
     return fs.readFileSync(file, 'base64'); // Returns the image as a base64 encoded string
@@ -61,12 +40,12 @@ exports.putAddProduct = (req, res, next) => {
             message: "Not authorized to perform this action"
         })
     }
-    // not sure how to handle errors...
     const product = new Product({
         title: title,
         price: price,
         description: description,
-        image: base64_encode(image),
+        image: image,
+        //image: base64_encode(image),
         userId: userId
     });
     product

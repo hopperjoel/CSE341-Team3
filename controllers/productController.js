@@ -13,10 +13,6 @@ const User = require('../models/users')
  exports.getHomepage = (req, res, next) => {
     Product
         .find()
-
-    //const prod1 = id:622fecb632cc9c150e23bb9c;
-    //const prod2 = id:622fecd032cc9c150e23bb9;
-    //const prod3 = id:622fece432cc9c150e23bba0;
     //findById() to get certain items?
         .then(result => {
             products = result.slice(0, 3)
@@ -106,7 +102,7 @@ exports.searchProduct = (req, res, next) => {
         })
 }
 
-// GET Prdouct Description
+// GET Product Description
 exports.getProdDesc = (req, res, next) => {
     Product
         .findById( req.body.productId ) // ID hard coded for now
